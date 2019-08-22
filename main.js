@@ -27,31 +27,33 @@ function countedItems(itemIds) {
     return itemNum;
 }
 
-console.log(getItem(countedItems(itemIds)));
+console.log(calculateItemTotal(getItem(countedItems(itemIds))));
 
 function getItem(itemNum) {
-    let result = [];
+    let carItemInfos = [];
     for (let i = 0; i < itemNum.length; i++) {
         for (let j = 0; j < itemInfos.length; j++)
 
             if (itemNum[i].id === itemInfos[j].id) {
-                result.push(
-                    {
-                        id: itemNum[i].id,
-                        name: itemInfos[j].name,
-                        price: itemInfos[j].price,
-                        count: itemNum[i].count
-                    }
-                )
+                carItemInfos.push({
+                    id: itemNum[i].id,
+                    name: itemInfos[j].name,
+                    price: itemInfos[j].price,
+                    count: itemNum[i].count
+                })
             }
     }
-    return result;
+    return carItemInfos;
 }
 
 
 
-function itemTotal() {
-
+function calculateItemTotal(carItemInfos) {
+   let carItemTotal =0;
+   for (let i=0;i<carItemInfos.length;i++){
+       carItemTotal+=(carItemInfos[i].price * carItemInfos[i].count)
+   }
+   return carItemTotal;
 }
 
 function genreateReceipt() {
