@@ -90,4 +90,4 @@ function printReceipt(carItemIds) {
 
 module.exports = printReceipt;
 
-// console.log(printReceipt(carItemIds));
+console.log(printReceipt(carItemIds));
