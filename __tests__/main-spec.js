@@ -1,7 +1,18 @@
-const testDemo = require('../main');
+const printReceipt = require('../main');
 
-it ('should return multiply table from 2 to 4 when call testDemo', () => {
-    expect(testDemo(2, 4)).toBe("2*2=4\n2*3=6 3*3=9\n2*4=8 3*4=12 4*4=16");
+it('test', () => {
+    expect(printReceipt(['0001', '0003', '0005', '0003'])).toBe(
+        "Receipts\n" +
+        "------------------------------------------------------------\n" +
+        "Coca Cola\t3\t1\n"+
+        "Pepsi-Cola\t5\t2\n"+
+        "Dr Pepper\t7\t1\n"+
+        "------------------------------------------------------------\n" +
+        "Price: 20");
 });
+
+
+
+
 
 

@@ -11,7 +11,7 @@ var itemInfos = [
     { "id": "0010", "name": "Fanta", "price": 12 }
 ]
 
-var itemIds = ['0001', '0003', '0005', '0003']
+var carItemIds = ['0001', '0003', '0005', '0003']
 
 function countedItems(itemIds) {
     let itemNum = [];
@@ -26,8 +26,6 @@ function countedItems(itemIds) {
     }
     return itemNum;
 }
-
-console.log(calculateItemTotal(getItem(countedItems(itemIds))));
 
 function getItem(itemNum) {
     let carItemInfos = [];
@@ -46,16 +44,50 @@ function getItem(itemNum) {
     return carItemInfos;
 }
 
-
-
 function calculateItemTotal(carItemInfos) {
-   let carItemTotal =0;
-   for (let i=0;i<carItemInfos.length;i++){
-       carItemTotal+=(carItemInfos[i].price * carItemInfos[i].count)
-   }
-   return carItemTotal;
+    let carItemTotal = 0;
+    for (let i = 0; i < carItemInfos.length; i++) {
+        carItemTotal += (carItemInfos[i].price * carItemInfos[i].count)
+    }
+    return carItemTotal;
 }
 
-function genreateReceipt() {
+function createReceiptBodyLine(carItemInfo) {
+    let result = "";
+    result = `${carItemInfo.name}\t${carItemInfo.price}\t${carItemInfo.count}\n`
+    return result
+}
+
+function createReceiptBody(carItemInfos) {
+    let result = '';
+    for (let i = 0; i < carItemInfos.length; i++) {
+        result += createReceiptBodyLine(carItemInfos[i])
+    }
+    return result;
+}
+
+function genreateReceipt(receiptBody, itemTotal) {
+    let result = '';
+    result =
+        "Receipts\n" +
+        "------------------------------------------------------------\n" +
+        receiptBody +
+        "------------------------------------------------------------\n" +
+        "Price: " + itemTotal
+    return result;
 
 }
+
+function printReceipt(carItemIds) {
+    let carItemCount = countedItems(carItemIds);
+    let carItemInfo = getItem(carItemCount);
+    let carItemTotal = calculateItemTotal(carItemInfo);
+    let receiptBody = createReceiptBody(carItemInfo);
+    // console.log(receiptBody)
+    let receipt = genreateReceipt(receiptBody, carItemTotal);
+    return receipt;
+}
+
+module.exports = printReceipt;
+
+// console.log(printReceipt(carItemIds));
